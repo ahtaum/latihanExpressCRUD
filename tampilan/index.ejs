@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+        font-weight: lighter;
+      }
+    </style>
+
+    <!-- <title>{{title}}</title> -->
+    <title><%- title %></title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="/tentang">Tentang</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card my-5 p-3">
+            <div class="card-body">
+              <!-- <h3 class="text-center my-3 font-weight-lighter">{{judul}}</h3> -->
+              <h3 class="text-center my-3 font-weight-lighter"><%- judul %></h3>
+              <form action="/" method="post">
+                <label for="dataCorona">masukan data Corona per provinsi</label>
+                <input type="text" name="dataCorona" class="form-control" />
+                <button class="btn btn-outline-secondary my-3">Cari</button>
+              </form>
+              <!-- <p>{{negaranya}}</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="card my-3">
+              <div class="card-body">
+                <h3 class="text-center my-3 font-weight-lighter">
+                  {{ dataacak }}
+                </h3>
+                <form action="/" method="post">
+                  <input
+                    type="text"
+                    name="nama"
+                    class="form-control"
+                    placeholder="masukan nama elu..."
+                  />
+                  <input
+                    type="number"
+                    name="usia"
+                    class="form-control my-3"
+                    placeholder="usia elu berapa..."
+                  />
+                  <input
+                    type="text"
+                    name="jurusan"
+                    class="form-control"
+                    placeholder="elu tertarik di jurusan atau bidang mana..."
+                  />
+                  <button class="btn btn-outline-secondary my-3">Oke</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="card my-3">
+              <div class="card-body">
+                <h3>Hasilnya</h3>
+                <!-- <p>{{datanya}}</p> -->
+                <!-- <%= datanya %> -->
+                <!-- <% for(var i = 0; i < datanya.length; i++) { %>
+                    <%= datanya[i].nama %><br>
+                <% } %> -->
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Juruan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% let nomor = 1 %>
+                    <% for(var i = 0; i < datanya.length; i++) { %>
+                      <tr>
+                        <td><%= nomor++ %></td>
+                        <td><%= datanya[i].nama %></td>
+                        <td><%= datanya[i].jurusan %></td>
+                      </tr>
+                      <tr>
+                    <% } %>
+                    </tbody>
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
