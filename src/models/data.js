@@ -1,13 +1,17 @@
 const mongoose = require(`mongoose`)
-
 const dataSkema = new mongoose.Schema({
+    // _id: {
+    //     type: Object
+    // },
     nama: {
-        type: String,
-        required: true
+        type: String
+        // required: [true, 'kolom nama belum diisi']
     },
-    usia: {
+    nim: {
         type: Number,
         default: 0,
+        // required: [true, 'kolom nim belum diisi'],
+        // minlength:[9,'Minimun code length 5 characters'],
         validate(value) {
             if (value < 0) throw new Error(`Error Mhamank`)
         }

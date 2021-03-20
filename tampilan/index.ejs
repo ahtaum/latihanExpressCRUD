@@ -29,7 +29,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="border-bottom: 1px solid rgb(236, 66, 66);">
       <a class="navbar-brand" href="/">Navbar</a>
       <button
         class="navbar-toggler"
@@ -49,95 +49,130 @@
         </div>
       </div>
     </nav>
-
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="card my-5 p-3">
-            <div class="card-body">
-              <!-- <h3 class="text-center my-3 font-weight-lighter">{{judul}}</h3> -->
-              <h3 class="text-center my-3 font-weight-lighter"><%- judul %></h3>
-              <form action="/" method="post">
-                <label for="dataCorona">masukan data Corona per provinsi</label>
-                <input type="text" name="dataCorona" class="form-control" />
-                <button class="btn btn-outline-secondary my-3">Cari</button>
-              </form>
-              <!-- <p>{{negaranya}}</p> -->
-            </div>
+    
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="tambah">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tambahlabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <section>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h3 class="text-center my-3 font-weight-lighter" id="app">
+                      {{ pesan }}
+                    </h3>
+                    <form action="/" method="post">
+                      <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" name="nama" class="form-control" placeholder="masukan nama elu..." />
+                      </div>
+                      <div class="form-group">
+                        <label for="nim">Nim</label>
+                        <input type="number" name="nim" class="form-control my-3" placeholder="nim elu berapa..." />
+                      </div>
+                      <div class="form-group">
+                        <label for="jurusan">Jurusan</label>
+                        <input
+                        type="text" name="jurusan" class="form-control" placeholder="elu tertarik di jurusan atau bidang mana..." />
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-outline-success my-3">Simpan</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
     </div>
 
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="card my-3">
-              <div class="card-body">
-                <h3 class="text-center my-3 font-weight-lighter">
-                  {{ dataacak }}
-                </h3>
-                <form action="/" method="post">
-                  <input
-                    type="text"
-                    name="nama"
-                    class="form-control"
-                    placeholder="masukan nama elu..."
-                  />
-                  <input
-                    type="number"
-                    name="usia"
-                    class="form-control my-3"
-                    placeholder="usia elu berapa..."
-                  />
-                  <input
-                    type="text"
-                    name="jurusan"
-                    class="form-control"
-                    placeholder="elu tertarik di jurusan atau bidang mana..."
-                  />
-                  <button class="btn btn-outline-secondary my-3">Oke</button>
-                </form>
-              </div>
+    <!-- Modal Ubah Data -->
+    <% for(var x = 0; x < datanya.length; x++) { %>
+      <div class="modal fade" id="exampleModal<%= datanya[x].id %>">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"><%= datanya[x].id %></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form action="/ubahData" method="post">
+
+                <div class="form-group">
+                  <input type="hidden" name="idObjek" value="<%= datanya[x].id %>">
+                </div>
+
+                <div class="form-group">
+                  <label for="nama">Nama</label>
+                  <input type="text" name="namaOrang" placeholder="masukan nama..." class="form-control hasil">
+                </div>
+
+                <div class="form-group">
+                  <label for="jurusan">Jurusan</label>
+                  <input type="text" name="jurusannya" placeholder="masukan jurusan..." class="form-control">
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" name="ubah">Save changes</button>
+                </div>
+              </form>
+
             </div>
           </div>
         </div>
       </div>
-    </section>
+    <% } %>
 
     <section>
       <div class="container">
+        <h1 class="my-3" style="font-weight: lighter;">Data Saya</h1>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah</button>
         <div class="row">
           <div class="col">
-            <div class="card my-3">
-              <div class="card-body">
-                <h3>Hasilnya</h3>
-                <!-- <p>{{datanya}}</p> -->
-                <!-- <%= datanya %> -->
-                <!-- <% for(var i = 0; i < datanya.length; i++) { %>
-                    <%= datanya[i].nama %><br>
-                <% } %> -->
-                <table class="table">
+            <div class="card my-3" style="border: 1px solid rgb(236, 66, 66);">
+              <div class="card-body table-responsive">
+                <table class="table table-striped">
                     <thead>
                       <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Juruan</th>
+                        <th scope="col">Nim</th>
+                        <th scope="col">Jurusan</th>
+                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
                     <% let nomor = 1 %>
                     <% for(var i = 0; i < datanya.length; i++) { %>
                       <tr>
-                        <td><%= nomor++ %></td>
+                        <th scope="row"><%= nomor++ %></th>
                         <td><%= datanya[i].nama %></td>
+                        <td><%= datanya[i].nim %></td>
                         <td><%= datanya[i].jurusan %></td>
+                        <div id="app">
+                        <form action="#">
+                          <!-- <input type="hidden" id="id" name="id" value="<%= datanya[i]._id %>"> -->
+                          <td><button type="button" class="btn tombol btn-outline-primary" data-toggle="modal" data-target="#exampleModal<%= datanya[i].id %>">Ubah</button></td>
+                        </form>
+                        </div>
                       </tr>
-                      <tr>
                     <% } %>
                     </tbody>
-                  </table>
+                </table>
               </div>
             </div>
           </div>
@@ -146,6 +181,7 @@
     </section>
 
     <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script
@@ -158,5 +194,6 @@
       integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
       crossorigin="anonymous"
     ></script>
+
   </body>
 </html>
